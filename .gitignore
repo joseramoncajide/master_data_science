@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.httr-oauth
+full_scripts/*
+data/flights/*
+*.log
+*.sqlite
+logs/*
+.DS_Store
