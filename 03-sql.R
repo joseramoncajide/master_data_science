@@ -3,12 +3,12 @@
 # Master Data Science: SQL with R
 ##########################################################################
 
-list.of.packages <- c("R.utils", "tidyverse", "doParallel", "foreach", "sqldf", "broom", "DBI")
+list.of.packages <- c("R.utils", "tidyverse", "doParallel", "foreach", "sqldf", "broom", "DBI", "data.table")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
 
-flights <- fread('data/flights/2008.csv')
+flights <- data.table::fread('data/flights/2008.csv')
 
 
 # SQL con R ---------------------------------------------------------------
@@ -43,6 +43,9 @@ carrier_ratios <- sqldf("SELECT UniqueCarrier, Flights, ArrivalDelays AS Yes,  F
 # 2     Northwest Airlines Inc.    1930  1108   822  0.57
 # 
 ##########################################################################
+
+library(tidyverse)
+
 airlines <- read_csv('data/airlines.csv')
 
 sqldf("SELECT * FROM airlines LIMIT 10")
@@ -96,7 +99,7 @@ barplot(t(proportions[c('Envoy Air', 'Delta Air Lines Inc.'),]), beside=TRUE, le
 test_result <- pairwise.prop.test(carrier_ratios.tbl ,p.adjust.method="none")
 test_result
 
-# Because the p.values are smaller than the significance level for each pair-wise comparison we can reject the null hypothesis that the proportions are equal based on the available sample of data.
+# When the p.values are smaller than the significance level for each pair-wise comparison we can reject the null hypothesis that the proportions are equal based on the available sample of data.
 
 # Airlines 
 test_result <- broom::tidy(test_result)
