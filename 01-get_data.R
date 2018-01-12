@@ -46,7 +46,7 @@ page <- read_html("http://stat-computing.org/dataexpo/2009/the-data.html")
 (linked_bz2_files <- str_subset(linked_resources, "\\.bz2"))
 (bz2_files_links <- paste0("http://stat-computing.org/dataexpo/2009/", linked_bz2_files))
 
-(bz2_files_links <- head(bz2_files_links, 2)) # Nos quedamos con sólo los dos primeros 
+(bz2_files_links <- tail(bz2_files_links, 2)) # Nos quedamos con sólo los dos primeros 
 
 (num_files <- length(bz2_files_links))
 
