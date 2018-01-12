@@ -1,6 +1,9 @@
 # Data Science Class
 Accompanying code repository for Master in Data Science
 
+![Rstudio](img/rstudio_ide.png "Rstudio")
+
+
 ## Agenda
 
 1. Getting the data [`01-get_data.R`](01-get_data.R)
