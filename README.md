@@ -17,7 +17,7 @@ Accompanying code repository for Master in Data Science
 * Modeling flight data [`bonus_modeling_flights.R`](bonus_modeling_flights.R) 
 
 ## Datasets
-* [Flights data CSVs](http://stat-computing.org/dataexpo/2009/the-data.html)
+* [Flights data CSVs](http://stat-computing.org/dataexpo/2009/the-data.html) - [Dictionary](https://www.transtats.bts.gov/Fields.asp?Table_ID=236)
 * [Flights data BigQuery](https://bigquery.cloud.google.com/table/datascience-open-data:flights.flights)
 
 *@jrcajide* - [es.linkedin.com/in/jrcajide
