@@ -1,7 +1,8 @@
 # Data Science Class
-Accompanying code repository for Master in Data Science
+Accompanying code repository for my teaching Data Science classes.
 
 ![Rstudio](img/rstudio_ide.png "Rstudio")
+
 
 
 ## Agenda
@@ -22,6 +23,9 @@ Accompanying code repository for Master in Data Science
 ## Datasets
 * [Flights data CSVs](http://stat-computing.org/dataexpo/2009/the-data.html) - [Dictionary](https://www.transtats.bts.gov/Fields.asp?Table_ID=236)
 * [Flights data BigQuery](https://bigquery.cloud.google.com/table/datascience-open-data:flights.flights)
+
+## Extra materials
+![Rstudio](img/gapminder.gif "Rstudio")
 
 *@jrcajide* - [es.linkedin.com/in/jrcajide
 ](http://es.linkedin.com/in/jrcajide
