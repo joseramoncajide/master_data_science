@@ -15,6 +15,7 @@ Accompanying code repository for my teaching Data Science classes.
 6. Advanced importing adn exporting data tips [`06-advanced_import_export.R`](06-advanced_import_export.R)
 7. Getting data from Google BigQuery [`07-big_data_bigquery.R`](07-big_data_bigquery.R)
 8. Data wrangling and modeling with Apache Spark [`08-big_data_spark.R`](08-big_data_spark.R)
+9. Time series manipulation, analysis and forecasting [`09-time_series.R`](09-time_series.R)
 
 ## Bonus
 * Parallel processing [`bonus-multidplyr.R`](bonus-multidplyr.R)
