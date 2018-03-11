@@ -16,8 +16,8 @@ Accompanying code repository for my teaching Data Science classes.
 7. Getting data from Google BigQuery [`07-big_data_bigquery.R`](07-big_data_bigquery.R)
 8. Data wrangling and modeling with Apache Spark [`08-big_data_spark.R`](08-big_data_spark.R)
 9. Time series manipulation, analysis and forecasting [`09-time_series.R`](09-time_series.R)
-10. Time series forecasting using machine learning in H2O [`10-time_series_machine_learning_h2o`](10-time_series_machine_learning_h2o)
-
+10. Time series forecasting using machine learning in H2O [`10-time_series_machine_learning_h2o.R`](10-time_series_machine_learning_h2o.R)
+11. Introduction to data visualizacion [`11-dataviz_with_ggplot.R`](11-dataviz_with_ggplot.R)
 
 ## Bonus
 * Parallel processing [`bonus-multidplyr.R`](bonus-multidplyr.R)
@@ -28,6 +28,9 @@ Accompanying code repository for my teaching Data Science classes.
 * [Flights data BigQuery](https://bigquery.cloud.google.com/table/datascience-open-data:flights.flights)
 
 ## Extra materials
+* Time series basics (Spanish)  [`intro_series_temporales.R`](intro_series_temporales.R)
+
+
 ![Rstudio](img/gapminder.gif "Rstudio")
 
 *@jrcajide* - [es.linkedin.com/in/jrcajide

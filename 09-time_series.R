@@ -1,3 +1,11 @@
+##########################################################################
+# Jose Cajide - @jrcajide
+# Master Data Science: Time series manipulation, analysis and forecasting
+##########################################################################
+
+rm(list=ls()) 
+cat("\014")
+
 list.of.packages <- c("tibbletime", "tidyverse", "tidyquant", "zoo", "ggmap", "forecast", "smooth", "Metrics", "timetk", "sweep", "ggseas")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)

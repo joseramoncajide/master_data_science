@@ -1,11 +1,21 @@
+##########################################################################
+# Jose Cajide - @jrcajide
+# Master Data Science: Time series forecasting using machine learning in H2O
+##########################################################################
+
+rm(list=ls()) 
+cat("\014")
+
+list.of.packages <- c("h2o", "tidyverse", "timetk", "tidyquant")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
 # Load libraries
-library(h2o)        # Awesome ML Library
-library(timetk)     # Toolkit for working with time series in R
-library(tidyquant)  # Loads tidyverse, financial pkgs, used to get data
+library(h2o)
+library(tidyverse) 
+library(timetk)  
+library(tidyquant)
 
-
-
-# ipi.df <- ipi.df %>% rename(price = ipi)
 ipi.df <- read_csv('data/ipi.csv')
 ipi.df %<>% 
   separate(date, into = c("year", "month"), sep = "M") %>% 
