@@ -28,7 +28,7 @@ Accompanying code repository for my teaching Data Science classes.
 * [Flights data BigQuery](https://bigquery.cloud.google.com/table/datascience-open-data:flights.flights)
 
 ## Extra materials
-* Time series basics (Spanish)  [`intro_series_temporales.R`](intro_series_temporales.R)
+* Time series basics (Spanish)  [`intro_series_temporales.md`](intro_series_temporales.md)
 
 
 ![Rstudio](img/gapminder.gif "Rstudio")
