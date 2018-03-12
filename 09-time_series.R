@@ -38,23 +38,15 @@ ipi.df <- read_csv('data/ipi.csv')
 #----------------------------------------------------------------------------
 
 # Sol: 
-ipi.df %<>% 
-  separate(date, into = c("year", "month"), sep = "M") %>% 
-  mutate(date = as.Date(paste(year, month, 01, sep = "-"))) %>% 
-  select(date, ipi)
+# ipi.df <- ip.df %>% 
+
 
 #----------------------------------------------------------------------------
 # Exercise 2. Plot the data as a time series using ggplot2
 #----------------------------------------------------------------------------
 
-ipi.df %>%
-  ggplot(aes(x = date, y = ipi)) +
-  geom_line(size = 1, color = palette_light()[[1]]) +
-  geom_smooth(method = "loess") +
-  labs(title = "Indice De Produccion Industrial De Cantabria", x = "", y = "IPI") +
-  scale_y_continuous() +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  theme_tq()
+# ipi.df %>% ggplot
+
 
 #----------------------------------------------------------------------------
 # Data as a vector
@@ -191,17 +183,7 @@ ipi.df %>%
 # short_term_mean and the long_term_mean
 #----------------------------------------------------------------------------
 
-ipi.df %>% 
-  mutate(short_mean = short_term_mean(ipi),
-         long_term_mean = long_term_mean(ipi)) %>% 
-  gather(key = "indice", value ='val', -date) %>% 
-  ggplot(aes(x = date, y = val, color=indice)) +
-  geom_line(size = .5, color = palette_light()[[1]]) +
-  geom_smooth(method = "loess") +
-  labs(title = "Indice De Produccion Industrial De Cantabria", x = "", y = "IPI") +
-  scale_y_continuous() +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  theme_tq()
+# ipi.df %>% 
 
 
 
@@ -438,12 +420,8 @@ round(fit_es$alpha,4)
 # Get the proposed α, β and γ.
 # Check the final sum of squared errors achieved in optimizing
 #----------------------------------------------------------------------------
-fit_hw <- HoltWinters(ipi_train)
-round(fit_hw$alpha, 2)
-round(fit_hw$beta, 2)
-round(fit_hw$gamma, 2)
-plot(fit_hw)
-fit_hw$SSE
+# fit_hw <- HoltWinters(ipi_train)
+
 
 
 # Predictive performance of the model
