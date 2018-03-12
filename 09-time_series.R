@@ -275,8 +275,14 @@ airbnb_plot
 ipi.ts
 class(ipi.ts)
 
-# Naive
+# Average method
+ipi.mean <- meanf(ipi.ts, h = 12)
+summary(ipi.mean)
+plot(ipi.mean)
+autoplot(ipi.mean)
 
+
+# Naive
 ipi.naive <- naive(ipi.ts, 12)
 summary(ipi.naive)
 plot(ipi.naive)
@@ -303,13 +309,20 @@ n_test <- 12
 autoplot(ipi_train) 
 autoplot(ipi_test) 
 
-
 ipi.naive_fc <- naive(ipi_train, h = length(ipi_test))
 ipi.mean_fc <- meanf(ipi_train, h = length(ipi_test))
 ipi.snaive_fc <- snaive(ipi_train, h = length(ipi_test))
-accuracy(ipi.mean_fc, ipi_test)
-accuracy(ipi.naive_fc, ipi_test)
-accuracy(ipi.snaive_fc, ipi_test)
+forecast::accuracy(ipi.mean_fc, ipi_test)
+forecast::accuracy(ipi.naive_fc, ipi_test)
+forecast::accuracy(ipi.snaive_fc, ipi_test)
+
+autoplot(ipi_train) +
+  autolayer(ipi.mean_fc$mean, series="Mean") +
+  autolayer(ipi.naive_fc$mean, series="Naïve") +
+  autolayer(ipi.snaive_fc$mean, series="Seasonal naïve") +
+  ggtitle("IPI Forecasts") +
+  xlab("Year") + ylab("IPI") +
+  guides(colour=guide_legend(title="Forecast"))
 
 # Time Series Cross-validation
 errors <- tsCV(ipi.ts, forecastfunction = naive, h = 12)

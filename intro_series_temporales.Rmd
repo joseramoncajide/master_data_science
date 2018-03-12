@@ -6,9 +6,17 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(fpp)
+library(ggplot2)
+library(forecast)
 ```
 
-Una serie temporal se define como una colección de observaciones de una variable recogidas secuencialmente en el tiempo.
+Una serie temporal se define como una colección de observaciones (discretas o continuas) de una variable recogidas secuencialmente en el tiempo.
+
+* El **tiempo** es una elemento natural presente en el momento en el que se  genera el dato.
+* **Serie** es la característica fundamental de las series temporales. Quiere decir que una observación presente es influenciada por los valores pasados de la misma (Auto correlación).
+
+Lo modelos de series temporales usarán esta característica para predecir valores futuros.
 
 ## Ejemplos de series temporales
 
@@ -24,9 +32,56 @@ Una serie temporal se define como una colección de observaciones de una variabl
 
 Una serie temporal puede ser **discreta** o **continua** dependiendo de cómo sean las observaciones.
 
-Series son **determinísticas**: se pueden predecir exactamente los valores, se dice que las series son **determinísticas**.
+Series son **determinísticas**: se pueden predecir exactamente los valores ya que éstos se obtienen en función explícita del tiempo.
 
-Series son **estocásticas**: el futuro sólo se puede determinar de modo parcial por las observaciones pasadas y no se pueden determinar exactamente, se considera que los futuros valores tienen una **distribución de probabilidad** que está condicionada a los valores pasados. 
+```{r echo=FALSE}
+x=arima.sim(list(order = c(1,0,0), ar = 0.6), n = 100)
+y=2+time(x)*2+x
+plot(y)
+
+```
+
+```{r}
+summary(lm(y~time(y)))
+```
+
+```{r}
+kpss.test(y,null = c('T'))
+```
+
+H0: Tendencia estacionaria (Los datos siguen una tendencia lineal con el tiempo)
+H1: No estacionaria
+
+0.1 > 0.05 => No podemos rechazar H0: No hay evidencia de que la serie no sea estacionaria
+
+
+**Ejemplo**
+
+
+```{r echo=FALSE}
+
+data(austa)
+autoplot(austa) + xlab("Año") +
+  ylab("Millones de turistas") +
+  ggtitle("Australia: Turistas internacionales")
+```
+
+
+Series  **estocásticas**: el futuro sólo se puede determinar de modo parcial por las observaciones pasadas y no se pueden determinar exactamente, se considera que los futuros valores tienen una **distribución de probabilidad** que está condicionada a los valores pasados. 
+
+```{r echo=FALSE}
+x=arima.sim(list(order = c(0,1,1), ma = -0.7), n = 200)
+plot(x)
+```
+```{r}
+kpss.test(x,null = c('T'))
+```
+
+H0: Tendencia estacionaria (Los datos siguen una tendencia lineal con el tiempo)
+H1: No estacionaria
+
+0.01 < 0.05 => Rechazamos H0: La serie no es estacionaria 
+
 
 ## Objetivos del análisis de series temporales
 
@@ -81,7 +136,7 @@ A continuación debemos comprobar si la serie es **estacionaria o no estacionari
 
 > Existen métodos para transformar series no estacionarias en estacionarias.
 
-```{r}
+```{r echo=FALSE}
 set.seed(42)
 y<- w<- rnorm(1000)
 for (t in 2:1000) {
@@ -100,12 +155,12 @@ text(125,-6.5,labels=expression(ADF == -6.128));
 
 La serie es estable alrededor de un valor central y la distribución bastante simétrica
 
-```{r}
+```{r echo=FALSE}
 hist(y, main = "Histograma de la serie estacionaria")
 ```
 
 
-```{r}
+```{r echo=FALSE}
 set.seed(42)
 yns<- wns<- rnorm(1000)
 for (t in 3:1000) {
@@ -120,7 +175,7 @@ text(350,4,labels=expression(E(y[t])==-27.56))
 text(725,-6,labels=expression(E(y[t])==-64.51))
 text(125,-60,labels=expression(ADF == -2.0251));
 ```
-```{r}
+```{r echo=FALSE}
 hist(yns, main = "Histograma de una serie no estacionaria", breaks = 10)
 ```
 

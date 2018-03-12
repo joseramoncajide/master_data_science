@@ -1,7 +1,12 @@
 Series temporales
 ================
 
-Una serie temporal se define como una colección de observaciones de una variable recogidas secuencialmente en el tiempo.
+Una serie temporal se define como una colección de observaciones (discretas o continuas) de una variable recogidas secuencialmente en el tiempo.
+
+-   El **tiempo** es una elemento natural presente en el momento en el que se genera el dato.
+-   **Serie** es la característica fundamental de las series temporales. Quiere decir que una observación presente es influenciada por los valores pasados de la misma (Auto correlación).
+
+Lo modelos de series temporales usarán esta característica para predecir valores futuros.
 
 Ejemplos de series temporales
 -----------------------------
@@ -18,9 +23,74 @@ Tipos de series temporales
 
 Una serie temporal puede ser **discreta** o **continua** dependiendo de cómo sean las observaciones.
 
-Series son **determinísticas**: se pueden predecir exactamente los valores, se dice que las series son **determinísticas**.
+Series son **determinísticas**: se pueden predecir exactamente los valores ya que éstos se obtienen en función explícita del tiempo.
 
-Series son **estocásticas**: el futuro sólo se puede determinar de modo parcial por las observaciones pasadas y no se pueden determinar exactamente, se considera que los futuros valores tienen una **distribución de probabilidad** que está condicionada a los valores pasados.
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-1-1.png)
+
+``` r
+summary(lm(y~time(y)))
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = y ~ time(y))
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -2.07800 -0.70764 -0.08855  0.69063  2.08977 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 2.291474   0.196940   11.63   <2e-16 ***
+    ## time(y)     1.987908   0.003386  587.14   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.9773 on 98 degrees of freedom
+    ## Multiple R-squared:  0.9997, Adjusted R-squared:  0.9997 
+    ## F-statistic: 3.447e+05 on 1 and 98 DF,  p-value: < 2.2e-16
+
+``` r
+kpss.test(y,null = c('T'))
+```
+
+    ## Warning in kpss.test(y, null = c("T")): p-value greater than printed p-
+    ## value
+
+    ## 
+    ##  KPSS Test for Trend Stationarity
+    ## 
+    ## data:  y
+    ## KPSS Trend = 0.062387, Truncation lag parameter = 2, p-value = 0.1
+
+H0: Tendencia estacionaria (Los datos siguen una tendencia lineal con el tiempo) H1: No estacionaria
+
+0.1 &gt; 0.05 =&gt; No podemos rechazar H0: No hay evidencia de que la serie no sea estacionaria
+
+**Ejemplo**
+
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
+Series **estocásticas**: el futuro sólo se puede determinar de modo parcial por las observaciones pasadas y no se pueden determinar exactamente, se considera que los futuros valores tienen una **distribución de probabilidad** que está condicionada a los valores pasados.
+
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+``` r
+kpss.test(x,null = c('T'))
+```
+
+    ## Warning in kpss.test(x, null = c("T")): p-value smaller than printed p-
+    ## value
+
+    ## 
+    ##  KPSS Test for Trend Stationarity
+    ## 
+    ## data:  x
+    ## KPSS Trend = 0.60204, Truncation lag parameter = 3, p-value = 0.01
+
+H0: Tendencia estacionaria (Los datos siguen una tendencia lineal con el tiempo) H1: No estacionaria
+
+0.01 &lt; 0.05 =&gt; Rechazamos H0: La serie no es estacionaria
 
 Objetivos del análisis de series temporales
 -------------------------------------------
@@ -43,7 +113,7 @@ data(AirPassengers)
 plot(aggregate(AirPassengers,FUN=mean), main="Serie temporal con una tendencia positiva")
 ```
 
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 -   Estacionalidad: Variaciones cada cierto periodo de tiempo (semanal, mensual, etc.). Esta estacionalidad se puede eliminar de la serie temporal para facilitarnos su análisis.
 
@@ -51,7 +121,7 @@ plot(aggregate(AirPassengers,FUN=mean), main="Serie temporal con una tendencia p
 plot(AirPassengers, main="Serie temporal con una clara estacionalidad")
 ```
 
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 -   Componente aleatoria o ruido (random noise): Son los movimientos de la serie que quedan tras eliminar los demás componenentes. El objetivo es estudiar si existe algún modelo probabilístico que logre explicar este tipo de flutuaciones.
 
@@ -60,7 +130,7 @@ set.seed(1)
 plot(rnorm(100),type="l", main = "Serie temporal aleatoria")
 ```
 
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 > Las dos primeras componentes son determinísticas y la última es estocástica o aletaria.
 
@@ -83,53 +153,10 @@ A continuación debemos comprobar si la serie es **estacionaria o no estacionari
 
 > Existen métodos para transformar series no estacionarias en estacionarias.
 
-``` r
-set.seed(42)
-y<- w<- rnorm(1000)
-for (t in 2:1000) {
-    y[t]<- 0.9*y[t-1]+w[t]
-    }
-xy.mat<- cbind(c(0,450,225,750,600,1000),c(6.5,6.5,7.5,7.5,8.5,8.5))
-##Plot the series, with annotations for means and the Dicky-Fuller Test##
-plot(1:length(y),y,xlab="t",ylab=expression(y[t]),type="l",ylim=c(-8,10),main="Serie temporal estacionaria")
-points(xy.mat,pch=20,col="blue",cex=0.75)
-for(i in c(1,3,5)) {segments(x0=xy.mat[i,1],y0=xy.mat[i,2],x1=xy.mat[i+1],lty=3,col="blue",lwd=2)}
-text(125,7,labels=expression(E(y[t])==-0.220))
-text(350,8,labels=expression(E(y[t])==-0.376))
-text(725,9,labels=expression(E(y[t])==-0.341))
-text(125,-6.5,labels=expression(ADF == -6.128));
-```
-
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 La serie es estable alrededor de un valor central y la distribución bastante simétrica
 
-``` r
-hist(y, main = "Histograma de la serie estacionaria")
-```
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-5-1.png)
-
-``` r
-set.seed(42)
-yns<- wns<- rnorm(1000)
-for (t in 3:1000) {
-    yns[t]<-1.5*yns[t-1]-0.5*yns[t-2]+wns[t]
-    }
-plot(1:length(yns),yns,xlab="t",ylab=expression(y[t]),type="l",ylim=c(-100,20),main="Serie temporal no estacionaria")
-xyns.mat<- cbind(c(0,450,225,750,600,1000),c(10,10,0,0,-10,-10))
-points(xyns.mat,pch=20,col="blue",cex=0.75)
-for(i in c(1,3,5)) {segments(x0=xyns.mat[i,1],y0=xyns.mat[i,2],x1=xyns.mat[i+1],lty=3,col="blue",lwd=2)}
-text(125,14,labels=expression(E(y[t])==-13.27))
-text(350,4,labels=expression(E(y[t])==-27.56))
-text(725,-6,labels=expression(E(y[t])==-64.51))
-text(125,-60,labels=expression(ADF == -2.0251));
-```
-
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-6-1.png)
-
-``` r
-hist(yns, main = "Histograma de una serie no estacionaria", breaks = 10)
-```
-
-![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-12-1.png) ![](intro_series_temporales_files/figure-markdown_github/unnamed-chunk-13-1.png)
