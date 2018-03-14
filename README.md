@@ -18,6 +18,7 @@ Accompanying code repository for my teaching Data Science classes.
 9. Time series manipulation, analysis and forecasting [`09-time_series.R`](09-time_series.R)
 10. Time series forecasting using machine learning in H2O [`10-time_series_machine_learning_h2o.R`](10-time_series_machine_learning_h2o.R)
 11. Introduction to data visualizacion [`11-dataviz_with_ggplot.R`](11-dataviz_with_ggplot.R)
+12. Web scraping and text mining  [`12-web_scraping_text_mining.R`](12-web_scraping_text_mining.R)
 
 ## Bonus
 * Parallel processing [`bonus-multidplyr.R`](bonus-multidplyr.R)
