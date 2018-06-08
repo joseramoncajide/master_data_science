@@ -336,13 +336,6 @@ sub(pattern = "\\$", "\\!", "I love R$")
 gsub(pattern = "\\\\", " ", "I\\need\\space")
 
 
-# TODO
-# http://uc-r.github.io/regex
-
-# Dealing with Factors
-# http://uc-r.github.io/factors/
-
-
 # Dealing with Logicals ---------------------------------------------------
 
 x <- 5
