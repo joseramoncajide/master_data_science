@@ -79,13 +79,17 @@ install_github("hadley/dplyr")
 # Assignment & Evaluation -------------------------------------------------
 
 # assignment
-x <- 3
+x <- 16
 
 # evaluation
 x
 
+z <- expression(z <- 4)
+z
 
-y <- 3 
+eval(z)
+
+y <- 1 
 z <- 4
 x * y * z
 
@@ -102,16 +106,24 @@ options(digits = 3)
 42 %% 4         # modulo (remainder)
 
 
+
 # Miscellaneous Mathematical Functions
 
-x <- 10
-
+x <- 1000
 abs(x)      # absolute value
 sqrt(x)     # square root
 exp(x)      # exponential transformation
 log(x)      # logarithmic transformation
-cos(x)      # cosine and other trigonometric functions
+log(x, 10)
+log10(x) 
+10^log10(x) # equals x 
 
+log2(x) 
+2^log2(x) # equals x 
+
+cos(x)      # cosine and other trigonometric functions
+sin(x) 
+tan(x)
 
 # Infinite, and NaN Numbers
 1 / 0           # infinity
@@ -153,7 +165,7 @@ x > y
 
 # Note that there are no scalars in R, so c is actually a vector of length 1
 c <- 3
-
+is.vector(c)
 
 ######################
 # Data types
@@ -187,6 +199,14 @@ seq(from = 1, to = 21, by = 2)
 
 # generate a sequence of numbers from 1 to 21 that has 15 equal incremented numbers
 seq(0, 21, length.out = 15)
+
+
+# EXERCISE: 
+# generate a sequence of numbers from 1 to 10 by .1. Calculate de cosine and plot it. Add a line with de sine
+
+plot(cos(seq(0,10,0.1)),type="l")
+lines(sin(seq(0,10,0.1)), col='red')
+
 
 # Generating Repeated Sequences
 # replicates the values in x a specified number of times in a collated fashion
@@ -237,7 +257,7 @@ round(x, digits = 1)
 # Creating Strings
 
 a <- "learning to create"    # create string a
-b <- "character strings"     # create string
+b <- "character strings"     # create string b
 
 # paste together string a & b
 paste(a, b)

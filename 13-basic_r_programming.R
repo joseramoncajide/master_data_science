@@ -61,7 +61,7 @@ for (indice in vector) {
 calendario <- seq(2000, 2018 , by = 1)
 
 for (ano in calendario){
-  print(paste("El años es", ano))
+  print(paste("El año es", ano))
 }
 
 ano_actual <- as.numeric(format(Sys.Date(),'%Y'))
@@ -71,47 +71,45 @@ library(lubridate)
 ano_actual <- year(Sys.Date())
 
 for (ano in calendario){
-  ifelse(ano == ano_actual, print(paste("El años es", ano)), print(ano))
+  ifelse(ano == ano_actual, print(paste("El año es", ano)), print(ano))
 }
 
 lapply( calendario, print)
 
-lapply( calendario, function(ano) ifelse(ano == ano_actual, print(paste("El años es", ano)), print(ano)))
+lapply( calendario, function(ano) ifelse(ano == ano_actual, print(paste("El año es", ano)), print(ano)))
 
 # Más limpio
 
 busca_ano_actual <- function(ano) {
   resultado <- if(ano == ano_actual) {
-    resultado <- paste( ano, "es el año actual")
+    resultado_2 <- paste( ano, "es el año actual")
   } else {
-    resultado <- paste( ano, "no es el año actual")
+    resultado_2 <- paste( ano, "no es el año actual")
   }
   return(resultado)
 }
 
 busca_ano_actual(2000)
-busca_ano_actual(2017)
+busca_ano_actual(2018)
 
 sapply(calendario, busca_ano_actual)
 
 
 # Ejercicio ---------------------------------------------------------------
 
-# Año bisiesto
+# Año bisiesto: Haz una función que compruebe si un año es o no es bisiesto
 # https://es.wikipedia.org/wiki/A%C3%B1o_bisiesto#Algoritmo_computacional
 # Un año es bisiesto si es divisible entre cuatro y (no es divisible entre 100 ó es divisible entre 400).
 
 `%%` #División de enteros
-2000 %% 4 == 0
 
-es_ano_bisiesto <- function(ano){
-  return()
-}
-
-es_ano_bisiesto(2000)
+# Función:
 
 # Aplica a todos los años del calendario la función anterior para comprobar cuáles son años bisiestos
-resultado <- 
-  
-  # Guarda los años bisiestos en un vector
-  anos_bisiestos <- calendario[resultado]
+
+# Guarda los años bisiestos en un vector
+
+
+
+
+

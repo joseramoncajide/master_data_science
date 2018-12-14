@@ -76,15 +76,16 @@ download_flights_datasets(link)
 
 
 ##########################################################################
-# EJ: Coding exercise: Downloading all links
+# EJ: Coding exercise: Downloading all links 
+# using download_flights_datasets()
 ##########################################################################
 
 # Sol. 1:
-for (link in bz2_files_links){
-  download_flights_datasets(link)
-}
+
+
+
 #Sol. 2:
-lapply(bz2_files_links, download_flights_datasets)
+
 
 
 # Downloading all files in parallel

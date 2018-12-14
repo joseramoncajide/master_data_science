@@ -3,6 +3,11 @@
 # Master Data Science: Tidyr
 ##########################################################################
 
+library(tidyverse)
+library(readr)
+library(tidyr)
+
+
 gapminder <- read_csv("data/gapminder.csv")
 
 gap_wide <- read_csv("https://docs.google.com/spreadsheets/d/1NTXQNoY8V0H_EZ_peFmnH1ZcGlxCPhwl2VmJNpiACMU/pub?output=csv")

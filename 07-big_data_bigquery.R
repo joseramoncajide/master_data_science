@@ -24,7 +24,7 @@ library(dplyr)
 
 project <- "master-ds-test" # Pon aquí tu proyecto 
 
-con <- DBI::dbConnect(dbi_driver(),
+con <- DBI::dbConnect(bigquery(),
                       project = "datascience-open-data",
                       dataset = "flights",
                       billing = project 
