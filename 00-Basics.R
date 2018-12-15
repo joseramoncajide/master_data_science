@@ -58,22 +58,8 @@ help(package = "dplyr")      # provides details regarding contents of a package
 vignette(package = "dplyr")
 vignette("dplyr")      # view specific vignette
 
-# Installing for GitHub
-install.packages("devtools")
-library(devtools)
-install_github("hadley/dplyr")
 
 # Quick list of useful R packages: https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages
-
-
-# Exercises
-# ggplot2 is an extremely popular package for data visualization and is available from CRAN. Perform the following tasks:
-#   
-# Install the ggplot2 package.
-# Load the ggplot2 package.
-# Access the help documentation for the ggplot2 package.
-# Check out the vignette(s) for ggplot2
-
 
 
 # Assignment & Evaluation -------------------------------------------------
@@ -83,11 +69,6 @@ x <- 16
 
 # evaluation
 x
-
-z <- expression(z <- 4)
-z
-
-eval(z)
 
 y <- 1 
 z <- 4
@@ -104,7 +85,6 @@ options(digits = 3)
 42 / 4          # regular division
 42 %/% 4        # integer division
 42 %% 4         # modulo (remainder)
-
 
 
 # Miscellaneous Mathematical Functions
@@ -214,7 +194,7 @@ rep(1:4, times = 2)
 # replicates the values in x in an uncollated fashion
 rep(1:4, each = 2)
 
-
+rep(1:4, 2)
 # Comparing Numeric Values
 
 x <- c(1, 4, 9, 12)
@@ -531,11 +511,6 @@ v1[2:4]
 v1[c(2, 4, 6, 8)]
 v1[-1]
 
-# Subsetting with logical values
-
-v1[c(TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE)]
-v1[c(TRUE, FALSE)]
-
 
 # Managing Lists
 
@@ -546,7 +521,7 @@ str(l)
 # adding names to a pre-existing list
 
 l1 <- list(1:3, "a", c(TRUE, FALSE, TRUE))
-names(l1) <- c("item1", "item2", "item3")
+names() <- c("item1", "item2", "item3")
 
 # Subsetting Lists
 
