@@ -58,7 +58,7 @@ for (indice in vector) {
 }
 
 # Creamos un vector:
-calendario <- seq(2000, 2018 , by = 1)
+calendario <- seq(2000, 2019 , by = 1)
 
 for (ano in calendario){
   print(paste("El año es", ano))
