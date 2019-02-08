@@ -43,7 +43,7 @@ names(accidentes_coche) <- make.names(names(accidentes_coche))
 
 names(accidentes_coche)[2:8] <- c("Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom")
 
-accidentes_coche$Nº.Accidentes <- NULL
+accidentes_coche$Nº.Accidentes__7 <- NULL
 
 accidentes_coche
 
@@ -92,6 +92,7 @@ leaflet(alojamientos_madrid) %>%
 #----------------------------------------------------------------------------
 
 gapminder <- read_csv("https://raw.githubusercontent.com/joseramoncajide/curso_introduccion_R/master/data/gapminder.csv")
+gapminder <- read_csv("data/gapminder.csv")
 
 gapminder_por_continente <- split(gapminder, gapminder$continent) 
 
@@ -105,6 +106,8 @@ dir.create("archivos_gapminder")
 
 # EJEMPLO: Exportar dataframe a csv
 write.csv(gapminder, "archivos_gapminder/gapminder.csv")
+
+unlink("archivos_gapminder/gapminder.csv")
 
 # EJEMPLO: Archivo a generar
 file.path("archivos_gapminder", paste0("CONTINENTE", ".csv"))
