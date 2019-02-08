@@ -81,13 +81,13 @@ head(opiniones, 3)
 # Deberás obtener sólo las opiniones correspondientes a las anteriores opiniones. 
 # Estas se encuentran dentro de una etiqueta HTML con una clase "a-icon-star" 
 # que a su vez están dentro de un div con id "cm_cr-review_list"
-
-
-
-
-
-
-
+estrellas <- html_libro %>% 
+  html_nodes("#cm_cr-review_list") %>% 
+  html_nodes(".a-icon-star") %>% 
+  html_text() %>% 
+  str_sub(0, 3) %>% 
+  str_replace(',', '.') %>% 
+  as.numeric()
 
 
 # Modificamos la URL para simplificar. Movemos pageNumber al final 
@@ -182,7 +182,7 @@ results <- read_html(article_url) %>% # read html
   html_text %>% 
   gl_translate(format = "html", target = 'es') %>% 
   dplyr::select(translatedText)
-
+  
 results 
 
 #----------------------------------------------------------------------------
