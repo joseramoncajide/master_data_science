@@ -90,6 +90,12 @@ estrellas <- html_libro %>%
   as.numeric()
 
 
+
+# Ejercicio: Extraer las opiniones de las 30 primeras páginas.
+# El resultado será un dataframe con  pagina, opinion, estrellas
+# pagina opinion                                                                                                                          estrellas
+# 1 no se el libro no es para mi así que no lo he leído.pero voy a valorar físicamente al libro, es pequeñito como de 15 cm y tiene…         4
+
 # Modificamos la URL para simplificar. Movemos pageNumber al final 
 url <- "https://www.amazon.es/Cincuenta-Sombras-Grey-L-James/product-reviews/1101910461/ref=cm_cr_getr_d_show_all?ie=UTF8&reviewerType=all_reviews&pageNumber="
 num_paginas <- 30
@@ -114,12 +120,10 @@ for (j in 1: num_paginas){
   opiniones_amazon <- rbind(opiniones_amazon, data_frame('pagina'=j, 'opinion'=opinion, 'estrellas' = estrellas))
 }
 
-str(opiniones_amazon)
 
-opiniones_amazon$opinion <- as.character(opiniones_amazon$opinion)
+# opiniones_amazon <- read_csv('data/opiniones_amazon_50_sombras.csv')
 
-opiniones_amazon <- opiniones_amazon %>% as_data_frame() 
-
+# Vamos a filtrar las que no tengan iun numero de palabras minimo
 
 opiniones_amazon <- opiniones_amazon %>%  
   mutate(n_words = stringr::str_count(opinion, ' ') ) %>% 
@@ -130,11 +134,13 @@ opiniones_amazon <- opiniones_amazon %>%
 
 # Calcular el sentimiento de cada opinión
 
-gl_auth('cpb100-162913-faf075966c64.json')
+gl_auth('cpb100-162913-eb077c530ef4.json')
 
 # sentimiento <- read_rds('data/sentimiento.rds')
 # head(sentimiento)
 sentimiento <- lapply(opiniones_amazon$opinion, function(t) gl_nlp(t))
+
+# str(sentimiento)
 
 puntuaciones_producto <- sapply(sentimiento, function(t) t$documentSentiment$score)
 
@@ -176,6 +182,9 @@ opiniones_amazon[names(errores_destacados), ]
 #----------------------------------------------------------------------------
 
 article_url <- "https://itb.dk/maerkesager/privacy-og-sikkerhed/seks-nye-nationale-cyberstrategier-mangler-sammenhaeng/"
+
+# Ejercicio: Extraer el texto del articlo y traducirlo a espanol.
+# Usa la funcion gl_translate()
 
 results <- read_html(article_url) %>% # read html
   html_node(css = ".post-content") %>%  

@@ -81,45 +81,36 @@ head(opiniones, 3)
 # Deberás obtener sólo las opiniones correspondientes a las anteriores opiniones. 
 # Estas se encuentran dentro de una etiqueta HTML con una clase "a-icon-star" 
 # que a su vez están dentro de un div con id "cm_cr-review_list"
+estrellas <- 
+  
+  
 
 
 
-
-
-
-
-
+# Ejercicio: Extraer las opiniones de las 30 primeras páginas.
+# El resultado será un dataframe con  pagina, opinion, estrellas
+# pagina opinion                                                                                                                          estrellas
+# 1 no se el libro no es para mi así que no lo he leído.pero voy a valorar físicamente al libro, es pequeñito como de 15 cm y tiene…         4
 
 # Modificamos la URL para simplificar. Movemos pageNumber al final 
 url <- "https://www.amazon.es/Cincuenta-Sombras-Grey-L-James/product-reviews/1101910461/ref=cm_cr_getr_d_show_all?ie=UTF8&reviewerType=all_reviews&pageNumber="
-num_paginas <- 30
-opiniones_amazon <- NULL
 
-for (j in 1: num_paginas){
-  
-  html <- read_html(paste0(url, j)) 
-  
-  opinion <- html %>% 
-    html_nodes(".review-text") %>% 
-    html_text()
-  
-  estrellas <- html %>% 
-    html_nodes("#cm_cr-review_list") %>% 
-    html_nodes(".a-icon-star") %>% 
-    html_text() %>% 
-    str_sub(0, 3) %>% 
-    str_replace(',', '.') %>% 
-    as.numeric()
-  
-  opiniones_amazon <- rbind(opiniones_amazon, data_frame('pagina'=j, 'opinion'=opinion, 'estrellas' = estrellas))
-}
 
-str(opiniones_amazon)
 
-opiniones_amazon$opinion <- as.character(opiniones_amazon$opinion)
 
-opiniones_amazon <- opiniones_amazon %>% as_data_frame() 
 
+
+
+
+
+
+
+
+
+
+# opiniones_amazon <- read_csv('data/opiniones_amazon_50_sombras.csv')
+
+# Vamos a filtrar las que no tengan iun numero de palabras minimo
 
 opiniones_amazon <- opiniones_amazon %>%  
   mutate(n_words = stringr::str_count(opinion, ' ') ) %>% 
@@ -130,11 +121,13 @@ opiniones_amazon <- opiniones_amazon %>%
 
 # Calcular el sentimiento de cada opinión
 
-gl_auth('cpb100-162913-faf075966c64.json')
+gl_auth('cpb100-162913-eb077c530ef4.json')
 
 # sentimiento <- read_rds('data/sentimiento.rds')
 # head(sentimiento)
 sentimiento <- lapply(opiniones_amazon$opinion, function(t) gl_nlp(t))
+
+# str(sentimiento)
 
 puntuaciones_producto <- sapply(sentimiento, function(t) t$documentSentiment$score)
 
@@ -177,13 +170,15 @@ opiniones_amazon[names(errores_destacados), ]
 
 article_url <- "https://itb.dk/maerkesager/privacy-og-sikkerhed/seks-nye-nationale-cyberstrategier-mangler-sammenhaeng/"
 
-results <- read_html(article_url) %>% # read html
-  html_node(css = ".post-content") %>%  
-  html_text %>% 
-  gl_translate(format = "html", target = 'es') %>% 
-  dplyr::select(translatedText)
+# Ejercicio: Extraer el texto del articlo y traducirlo a espanol.
+# Usa la funcion gl_translate()
 
-results 
+results <- 
+  
+  
+  
+  
+  
 
 #----------------------------------------------------------------------------
 # Text mining
