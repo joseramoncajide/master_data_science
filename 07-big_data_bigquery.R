@@ -27,30 +27,21 @@ project <- "master-ds-test" # Pon aquí tu proyecto
 con <- DBI::dbConnect(bigquery(),
                       project = "datascience-open-data",
                       dataset = "flights",
-                      billing = project 
+                      billing = "datascience-open-data" 
 )
 
 DBI::dbListTables(con)
 
-flights_db <- tbl(con, "flights")
+flights_db <- tbl(con, "flights",project='datascience-open-data')
 
 # SQL
 sql <- "SELECT
   COUNT(DISTINCT Year) AS years,
-COUNT(DISTINCT UniqueCarrier) AS carriers,
-COUNT(DISTINCT Dest) AS airports
-FROM (
-SELECT
-Year,
-UniqueCarrier,
-Dest
+  COUNT(DISTINCT UniqueCarrier) AS carriers,
+  COUNT(DISTINCT Dest) AS airports
 FROM
-`datascience-open-data.flights.flights`
-GROUP BY
-1,
-2,
-3 )"
-query_exec(sql, project = project, use_legacy_sql = F)
+  `datascience-open-data.flights.flights`"
+resumen <- query_exec(sql, project = "datascience-open-data", use_legacy_sql = F)
 
 
 # Which is the flight cancellation ratio by year?
